@@ -28,7 +28,7 @@ def test_wrong_email(setup_chrome):
     browser.open('/account/login')
     browser.element('#email').type('test')
     browser.element('.button--Gh4nT').click()
-    browser.element('.form-group_invalid .form-group__error').should(have.text('Некорректная почта'))
+    browser.element('.form-group_invalid .form-group__error').should(have.text('This email not correct'))
 
 
 @allure.tag('web')
@@ -37,7 +37,7 @@ def test_email_not_fill(setup_chrome):
     browser = setup_chrome
     browser.open('/account/login')
     browser.element('.button--Gh4nT').click()
-    browser.element('.form-group_invalid .form-group__error').should(have.text('Введите адрес эл. почты'))
+    browser.element('.form-group_invalid .form-group__error').should(have.text('Enter email'))
 
 
 @allure.tag('web')
@@ -52,5 +52,5 @@ def test_password_not_fill(setup_chrome):
         browser.element('.button--Gh4nT').click()
 
     with allure.step('Проверяем вывод сообщения'):
-        browser.element('.form-group_invalid .form-group__error').should(have.text('Введите пароль'))
+        browser.element('.form-group_invalid .form-group__error').should(have.text('Enter password'))
 
