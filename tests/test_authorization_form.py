@@ -1,13 +1,18 @@
+import allure
 from selene.support.conditions import have, be
 from selene.support.shared import browser
 
 
+@allure.tag('web')
+@allure.label('owner', 'vkamenskiy')
 def test_password_errors_item_success():
     browser.open('/account/login')
     browser.element('#password').type('1111111111')
     browser.element('.password-errors__item_success').should(be.visible)
 
 
+@allure.tag('web')
+@allure.label('owner', 'vkamenskiy')
 def test_password_errors_item_fail():
     browser.open('/account/login')
     browser.element('#password').type('111')
@@ -15,6 +20,8 @@ def test_password_errors_item_fail():
     browser.element('.password-errors__item_error').should(be.visible)
 
 
+@allure.tag('web')
+@allure.label('owner', 'vkamenskiy')
 def test_wrong_email():
     browser.open('/account/login')
     browser.element('#email').type('test')
@@ -22,15 +29,24 @@ def test_wrong_email():
     browser.element('.form-group_invalid .form-group__error').should(have.text('Некорректная почта'))
 
 
+@allure.tag('web')
+@allure.label('owner', 'vkamenskiy')
 def test_email_not_fill():
     browser.open('/account/login')
     browser.element('.button--Gh4nT').click()
     browser.element('.form-group_invalid .form-group__error').should(have.text('Введите адрес эл. почты'))
 
 
+@allure.tag('web')
+@allure.label('owner', 'vkamenskiy')
 def test_password_not_fill():
-    browser.open('/account/login')
-    browser.element('#email').type('test@test.ru')
-    browser.element('.button--Gh4nT').click()
-    browser.element('.form-group_invalid .form-group__error').should(have.text('Введите пароль'))
+    with allure.step('Открываем страницу с авторизацией'):
+        browser.open('/account/login')
+
+    with allure.step('Зполняем данные'):
+        browser.element('#email').type('test@test.ru')
+        browser.element('.button--Gh4nT').click()
+
+    with allure.step('Проверяем вывод сообщения'):
+        browser.element('.form-group_invalid .form-group__error').should(have.text('Введите пароль'))
 

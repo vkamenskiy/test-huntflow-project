@@ -6,6 +6,3 @@ from selene import browser
 def browser_management():
     browser.config.base_url = 'https://huntflow.ru'
 
-    yield
-
-    browser.quit()

@@ -1,14 +1,16 @@
 import sys
 
+import allure
 from selene.support.conditions import have
 from selene.support.shared import browser
-
 from selenium.webdriver import Keys
 
 modifier_key = Keys.COMMAND if sys.platform == 'darwin' else Keys.CONTROL
 delete_text = modifier_key + 'a' + Keys.DELETE
 
 
+@allure.tag('web')
+@allure.label('owner', 'vkamenskiy')
 def test_successful_fill_calculator_form():
     browser.open('/calc')
     browser.element('#calc-amount').send_keys(delete_text).type('4')
