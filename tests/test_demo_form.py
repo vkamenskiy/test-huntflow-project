@@ -1,11 +1,11 @@
 import allure
 from selene.support.conditions import have
-from selene.support.shared import browser
 
 
 @allure.tag('web')
 @allure.label('owner', 'vkamenskiy')
-def test_demo_form_have_all_placeholders():
+def test_demo_form_have_all_placeholders(setup_chrome):
+    browser = setup_chrome
     browser.open('')
     browser.element('.is-button .js-navigation-modal-close').click()
     browser.element('[name="company"]').should(have.attribute('placeholder').value('Название компании'))

@@ -1,11 +1,11 @@
 import allure
 from selene.support.conditions import have, be
-from selene.support.shared import browser
 
 
 @allure.tag('web')
 @allure.label('owner', 'vkamenskiy')
-def test_password_errors_item_success():
+def test_password_errors_item_success(setup_chrome):
+    browser = setup_chrome
     browser.open('/account/login')
     browser.element('#password').type('1111111111')
     browser.element('.password-errors__item_success').should(be.visible)
@@ -13,7 +13,8 @@ def test_password_errors_item_success():
 
 @allure.tag('web')
 @allure.label('owner', 'vkamenskiy')
-def test_password_errors_item_fail():
+def test_password_errors_item_fail(setup_chrome):
+    browser = setup_chrome
     browser.open('/account/login')
     browser.element('#password').type('111')
     browser.element('.button--Gh4nT').click()
@@ -22,7 +23,8 @@ def test_password_errors_item_fail():
 
 @allure.tag('web')
 @allure.label('owner', 'vkamenskiy')
-def test_wrong_email():
+def test_wrong_email(setup_chrome):
+    browser = setup_chrome
     browser.open('/account/login')
     browser.element('#email').type('test')
     browser.element('.button--Gh4nT').click()
@@ -31,7 +33,8 @@ def test_wrong_email():
 
 @allure.tag('web')
 @allure.label('owner', 'vkamenskiy')
-def test_email_not_fill():
+def test_email_not_fill(setup_chrome):
+    browser = setup_chrome
     browser.open('/account/login')
     browser.element('.button--Gh4nT').click()
     browser.element('.form-group_invalid .form-group__error').should(have.text('Введите адрес эл. почты'))
@@ -39,7 +42,8 @@ def test_email_not_fill():
 
 @allure.tag('web')
 @allure.label('owner', 'vkamenskiy')
-def test_password_not_fill():
+def test_password_not_fill(setup_chrome):
+    browser = setup_chrome
     with allure.step('Открываем страницу с авторизацией'):
         browser.open('/account/login')
 
